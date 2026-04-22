@@ -9,16 +9,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
-
+@Builder
 public class Album {
-    private Long Id;
-    private String TítuloAlbum;
-    private Integer QtdFaixas;
-    private Integer AnoLancamento;
 
+    private Long id;
+    private String titulo;
+    private Integer quantidadeFaixas;
+    private Integer anoLancamento;
 
-
-
+    // 🔗 relacionamento (mesmo sem JPA)
+    private Artista artista;
+    private Gravadora gravadora;
 }

@@ -1,5 +1,15 @@
 package com.tecdes.music.dto;
 
-public class GravadoraDTO {
+public record  GravadoraDTO (
     
+    String nomeFantasia,
+    String cnpj,
+    String cidade,
+    Double faturamentoAnual
+
+
+){
+
+       
+
 }

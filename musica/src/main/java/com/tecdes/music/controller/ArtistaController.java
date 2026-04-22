@@ -15,18 +15,36 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/artistas")
 @RequiredArgsConstructor
 public class ArtistaController {
-    
+
     private final ArtistaService artistaService;
 
-    @PostMapping("/salvar")
-    public ResponseEntity<ArtistaDTO> postSalvarArtista(@RequestBody ArtistaDTO artistaDTO) {
+    // POST /api/artistas
+    @PostMapping
+    public ResponseEntity<ArtistaDTO> salvar(@RequestBody ArtistaDTO artistaDTO) {
         ArtistaDTO artistaCriado = artistaService.salvarTemporariamente(artistaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(artistaCriado);
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<ArtistaDTO>> getListarTudo() {
-        List<ArtistaDTO> artistas = artistaService.listarTodosEmMemoria();
-        return ResponseEntity.ok(artistas);
+    // GET /api/artistas
+    @GetMapping
+    public ResponseEntity<List<ArtistaDTO>> listar() {
+        return ResponseEntity.ok(artistaService.listarTodosEmMemoria());
     }
+    @DeleteMapping("/{id}")
+public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    artistaService.deletar(id);
+    return ResponseEntity.noContent().build();
+}
+
+@PutMapping("/{id}")
+public ResponseEntity<ArtistaDTO> atualizar(@PathVariable Long id,
+                                            @RequestBody ArtistaDTO dto) {
+    return ResponseEntity.ok(artistaService.atualizar(id, dto));
+}
+
+@PatchMapping("/{id}")
+public ResponseEntity<ArtistaDTO> atualizarParcial(@PathVariable Long id,
+                                                   @RequestBody ArtistaDTO dto) {
+    return ResponseEntity.ok(artistaService.atualizarParcial(id, dto));
+}
 }

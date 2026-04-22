@@ -32,4 +32,21 @@ public class AlbumController {
         List<AlbumDTO> albuns = albumService.listarAlbuns();
         return ResponseEntity.ok(albuns);
     }
+    @DeleteMapping("/{id}")
+public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    albumService.deletar(id);
+    return ResponseEntity.noContent().build();
+}
+
+@PutMapping("/{id}")
+public ResponseEntity<AlbumDTO> atualizar(@PathVariable Long id,
+                                          @RequestBody AlbumDTO dto) {
+    return ResponseEntity.ok(albumService.atualizar(id, dto));
+}
+
+@PatchMapping("/{id}")
+public ResponseEntity<AlbumDTO> atualizarParcial(@PathVariable Long id,
+                                                 @RequestBody AlbumDTO dto) {
+    return ResponseEntity.ok(albumService.atualizarParcial(id, dto));
+}
 }
